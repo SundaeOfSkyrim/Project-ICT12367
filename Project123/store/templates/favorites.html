@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>รายการโปรด</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'favorites' %}">ดูรายการโปรด</a>
+        <a href="{% url 'cart' %}">ดูตะกร้าสินค้า</a>
+    </div>
+
+    <h1>รายการโปรด</h1>
+    <div class="product-list">
+    {% for fav in favorites %}
+        <div class="product">
+            <img src="{{ fav.shoe.image.url }}" width="200" height="200">
+            <h3>{{ fav.shoe.name }}</h3>
+            <p>฿{{ fav.shoe.price }}</p>
+            <a href="{% url 'remove_from_favorites' fav.id %}" class="button button-remove">ลบ</a>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

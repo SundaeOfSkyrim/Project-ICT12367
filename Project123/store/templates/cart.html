@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ตะกร้าสินค้า</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'favorites' %}">ดูรายการโปรด</a>
+        <a href="{% url 'cart' %}">ดูตะกร้าสินค้า</a>
+    </div>
+
+    <h1>ตะกร้าสินค้า</h1>
+    <div class="product-list">
+    {% for item in cart_items %}
+        <div class="product">
+            <img src="{{ item.shoe.image.url }}" width="200" height="200">
+            <h3>{{ item.shoe.name }}</h3>
+            <p>฿{{ item.shoe.price }}</p>
+            <a href="{% url 'remove_from_cart' item.id %}" class="button button-remove">ลบ</a>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
